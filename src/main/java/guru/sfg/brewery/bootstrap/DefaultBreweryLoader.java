@@ -59,16 +59,15 @@ public class DefaultBreweryLoader implements CommandLineRunner {
 
         customerRepository.save(tastingRoom);
 
-        beerRepository.findAll().forEach(beer -> {
-            beerOrderRepository.save(BeerOrder.builder()
-                    .customer(tastingRoom)
-                    .orderStatus(OrderStatusEnum.NEW)
-                    .beerOrderLines(Set.of(BeerOrderLine.builder()
-                            .beer(beer)
-                            .orderQuantity(2)
-                            .build()))
-                    .build());
-        });
+        beerRepository.findAll().forEach(beer ->
+                beerOrderRepository.save(BeerOrder.builder()
+                .customer(tastingRoom)
+                .orderStatus(OrderStatusEnum.NEW)
+                .beerOrderLines(Set.of(BeerOrderLine.builder()
+                        .beer(beer)
+                        .orderQuantity(2)
+                        .build()))
+                .build()));
     }
 
     private void loadBreweryData() {
